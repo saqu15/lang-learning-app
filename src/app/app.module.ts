@@ -6,16 +6,9 @@ import { AppComponent } from './app.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TestComponentComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ButtonModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [AppComponent, TestComponentComponent],
+	imports: [BrowserModule, AppRoutingModule, ButtonModule],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
