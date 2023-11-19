@@ -1,1 +1,42 @@
-<router-outlet></router-outlet>
+<!-- <div class="card">
+	<p-menubar [model]="items">
+		<ng-template pTemplate="start">
+			<img
+				src="https://primefaces.org/cdn/primeng/images/primeng.svg"
+				height="40"
+				class="mr-2"
+				alt="a" />
+		</ng-template>
+		<ng-template pTemplate="end">
+			<input type="text" pInputText placeholder="Search" class="w-full" />
+		</ng-template>
+	</p-menubar>
+</div> -->
+
+<!-- <div class="card flex justify-content-center">
+	<p-toast></p-toast>
+	<p-menu [model]="items"></p-menu>
+</div> -->
+
+<div class="container">
+	<div class="sidebar">
+		<!-- Logo -->
+		<div class="logo">
+			<a href="#">
+				<img
+					src="../assets/logo-placeholder.png"
+					alt="Logo"
+					width="200"
+					height="50" />
+			</a>
+		</div>
+
+		<!-- Menu -->
+		<p-menu [model]="items"></p-menu>
+	</div>
+
+	<!-- Reszta zawartości aplikacji -->
+	<div class="main-content">
+		<router-outlet></router-outlet>
+	</div>
+</div>
