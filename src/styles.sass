@@ -8,16 +8,19 @@ body
 .container
 	display: flex
 	height: 100vh
+	width: 100vw
 
 
-.sidebar
+.nav
 	width: 250px
 	background-color: #333
 	color: white
 	padding: 10px
 	box-shadow: 2px 0 55px rgba(0, 0, 0, 0.1)
-	display: flex
-	flex-direction: column /* Ustaw menu jako kolumnę */
+	position: fixed
+	top: 0
+	left: 0
+	height: 100vh
 
 	.logo
 		height: 50px
@@ -48,6 +51,44 @@ body
 			font-weight: 250
 
 
-.main-content
+.main
 	flex: 1
-	padding: 20px
+	padding: 10px
+	position: fixed
+	top: 60px
+	left: 250px
+	display: flex
+	flex-direction: column
+	height: calc(100vh - 60px)
+	width: calc(100vw - 250px)
+
+
+.content
+	flex-grow: 1
+
+.header
+	padding: 5px
+	text-align: center
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+	position: fixed
+	top: 0
+	left: 250px
+	width: calc(100vw - 250px)
+	background-color: #3498DB
+	height: 60px
+
+	p-menubar
+		.p-menubar
+			background-color: #3498DB
+			border: 0
+			float: right
+			height: 100%
+
+		.p-menuitem-content
+			transition: background-color 0.3s ease
+			color: #3498DB
+			&:hover
+				background-color: rgba(255, 255, 255, 0.1)
+
+		.p-menuitem
+			background-color: #3498DB
