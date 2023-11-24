@@ -7,4 +7,6 @@ import { MessageService } from 'primeng/api';
 	styleUrls: ['./app.component.sass'],
 	providers: [MessageService],
 })
-export class AppComponent {}
+export class AppComponent {
+	authorized = true;
+}

@@ -1,5 +1,11 @@
 <div class="container">
-	<app-header></app-header>
-	<app-nav></app-nav>
-	<app-main></app-main>
+	<ng-container *ngIf="authorized; else loginScreen">
+		<app-header></app-header>
+		<app-nav></app-nav>
+		<app-main></app-main>
+	</ng-container>
 </div>
+
+<ng-template #loginScreen>
+	<app-login class="full-screen"></app-login>
+</ng-template>

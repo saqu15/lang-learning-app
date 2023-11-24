@@ -11,6 +11,8 @@ import { NavComponent } from './layout-elements/nav/nav.component';
 import { MainComponent } from './layout-elements/main/main.component';
 import { HeaderComponent } from './layout-elements/header/header.component';
 import { TestComponentComponent } from './test-component/test-component.component';
+import { LoginComponent } from './login/login.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
 	declarations: [
@@ -19,6 +21,7 @@ import { TestComponentComponent } from './test-component/test-component.componen
 		MainComponent,
 		HeaderComponent,
 		TestComponentComponent,
+		LoginComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -28,6 +31,7 @@ import { TestComponentComponent } from './test-component/test-component.componen
 		MenuModule,
 		ToastModule,
 		MenubarModule,
+		CardModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
