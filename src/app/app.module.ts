@@ -13,6 +13,9 @@ import { HeaderComponent } from './layout-elements/header/header.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { LoginComponent } from './login/login.component';
 import { CardModule } from 'primeng/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
 	declarations: [
@@ -32,6 +35,10 @@ import { CardModule } from 'primeng/card';
 		ToastModule,
 		MenubarModule,
 		CardModule,
+		FormsModule,
+		ReactiveFormsModule,
+		InputTextModule,
+		PasswordModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

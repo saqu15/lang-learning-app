@@ -1,10 +1,31 @@
 <div class="full-screen flex justify-content-center align-items-center">
-	<p-card header="Login" class="login-container">
-		<p class="m-0">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
-			sed consequuntur error repudiandae numquam deserunt quisquam
-			repellat libero asperiores earum nam nobis, culpa ratione quam
-			perferendis esse, cupiditate neque quas!
-		</p>
+	<p-card header="Login page" class="login-container" [formGroup]="loginForm">
+		<div class="grid pt-3">
+			<div class="col flex justify-content-center">
+				<span class="p-float-label">
+					<input pInputText id="username" formControlName="login" />
+					<label htmlFor="username">Username</label>
+				</span>
+			</div>
+		</div>
+
+		<div class="grid pt-3">
+			<div class="col flex justify-content-center">
+				<span class="p-float-label">
+					<p-password
+						[feedback]="false"
+						formControlName="password"></p-password>
+					<label for="password">Password</label>
+				</span>
+			</div>
+		</div>
+
+		<div class="grid pt-3">
+			<div class="col flex justify-content-center">
+				<p-button
+					label="Login"
+					[disabled]="!loginForm.valid"></p-button>
+			</div>
+		</div>
 	</p-card>
 </div>
