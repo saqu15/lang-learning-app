@@ -1,9 +1,9 @@
 <div class="full-screen flex justify-content-center align-items-center">
-	<p-card header="Login page" class="login-container">
+	<p-card header="Login page" class="login-container" [formGroup]="loginForm">
 		<div class="grid pt-3">
 			<div class="col flex justify-content-center">
 				<span class="p-float-label">
-					<input pInputText id="username" [(ngModel)]="value" />
+					<input pInputText id="username" formControlName="login" />
 					<label htmlFor="username">Username</label>
 				</span>
 			</div>
@@ -13,8 +13,8 @@
 			<div class="col flex justify-content-center">
 				<span class="p-float-label">
 					<p-password
-						[(ngModel)]="value"
-						[feedback]="false"></p-password>
+						[feedback]="false"
+						formControlName="password"></p-password>
 					<label for="password">Password</label>
 				</span>
 			</div>
@@ -22,7 +22,9 @@
 
 		<div class="grid pt-3">
 			<div class="col flex justify-content-center">
-				<p-button label="Login"></p-button>
+				<p-button
+					label="Login"
+					[disabled]="!loginForm.valid"></p-button>
 			</div>
 		</div>
 	</p-card>
