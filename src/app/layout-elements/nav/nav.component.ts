@@ -37,6 +37,11 @@ export class NavComponent implements OnInit {
 						icon: 'pi pi-upload',
 						routerLink: '/test',
 					},
+					{
+						label: 'Create new set',
+						icon: 'pi pi-upload',
+						routerLink: '/create-set',
+					},
 				],
 			},
 		];

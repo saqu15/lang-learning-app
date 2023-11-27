@@ -1,0 +1,74 @@
+<div [formGroup]="creatorForm">
+	<div class="grid pt-3">
+		<div class="col">
+			<input
+				pInputText
+				id="username"
+				formControlName="name"
+				placeholder="Set name"
+				class="w-full" />
+		</div>
+	</div>
+
+	<div class="grid pt-3">
+		<div class="col">
+			<p-dropdown
+				[options]="cities"
+				[(ngModel)]="selectedCity"
+				optionLabel="name"
+				[showClear]="true"
+				placeholder="Source language"
+				formControlName="languageFrom"
+				styleClass="w-full"></p-dropdown>
+		</div>
+		<div class="col">
+			<p-dropdown
+				[options]="cities"
+				[(ngModel)]="selectedCity"
+				optionLabel="name"
+				[showClear]="true"
+				placeholder="Target language"
+				formControlName="languageTo"
+				styleClass="w-full"></p-dropdown>
+		</div>
+	</div>
+
+	<p-divider></p-divider>
+
+	<ng-container formArrayName="words">
+		<ng-container *ngFor="let wordsForm of words.controls; let i = index">
+			<div
+				class="grid pt-3"
+				[formGroup]="convertAbstractControlToFormGroup(wordsForm)">
+				<div class="col-6">
+					<input
+						pInputText
+						id="username"
+						formControlName="wordFrom"
+						placeholder="Set name"
+						class="w-full" />
+				</div>
+
+				<div class="col-6">
+					<input
+						pInputText
+						id="username"
+						formControlName="wordTo"
+						placeholder="Set name"
+						class="w-full" />
+
+					<p-button
+						label="Delete"
+						(click)="deleteWordsRow(i)"></p-button>
+				</div>
+			</div>
+		</ng-container>
+	</ng-container>
+
+	<div class="grid pt-3">
+		<div class="col">
+			<p-button label="Add" (click)="addWordsRow()"></p-button>
+			<p-button label="test" (click)="test()"></p-button>
+		</div>
+	</div>
+</div>
