@@ -16,6 +16,10 @@ import { CardModule } from 'primeng/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { WordSetCreatorComponent } from './word-set-creator/word-set-creator.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { StyleClassModule } from 'primeng/styleclass';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
 	declarations: [
@@ -25,6 +29,7 @@ import { PasswordModule } from 'primeng/password';
 		HeaderComponent,
 		TestComponentComponent,
 		LoginComponent,
+		WordSetCreatorComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -39,6 +44,9 @@ import { PasswordModule } from 'primeng/password';
 		ReactiveFormsModule,
 		InputTextModule,
 		PasswordModule,
+		DropdownModule,
+		StyleClassModule,
+		DividerModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
