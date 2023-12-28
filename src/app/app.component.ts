@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { UserService } from './util/services/user.service';
+import { Observable, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
@@ -7,6 +9,14 @@ import { MessageService } from 'primeng/api';
 	styleUrls: ['./app.component.sass'],
 	providers: [MessageService],
 })
-export class AppComponent {
-	authorized = true;
+export class AppComponent implements OnInit {
+	authorized$!: Observable<boolean>;
+
+	private userService = inject(UserService);
+
+	ngOnInit(): void {
+		this.authorized$ = this.userService
+			.isLoggedIn$()
+			.pipe(tap(console.log));
+	}
 }

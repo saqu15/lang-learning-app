@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { UserService } from 'src/app/util/services/user.service';
 
 @Component({
 	selector: 'app-header',
@@ -8,6 +10,10 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
 	items: MenuItem[] | undefined;
+
+	private userService = inject(UserService);
+
+	private router = inject(Router);
 
 	ngOnInit() {
 		this.items = [
@@ -28,9 +34,11 @@ export class HeaderComponent implements OnInit {
 				label: 'Navigate',
 				items: [
 					{
-						label: 'Angular',
+						label: 'Logout',
 						icon: 'pi pi-external-link',
-						url: 'http://angular.io',
+						command: () => {
+							this.logout();
+						},
 					},
 					{
 						label: 'Router',
@@ -40,5 +48,10 @@ export class HeaderComponent implements OnInit {
 				],
 			},
 		];
+	}
+
+	private logout(): void {
+		this.userService.logout();
+		this.router.navigate(['/login']);
 	}
 }

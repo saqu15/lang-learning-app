@@ -1,5 +1,5 @@
 <div class="container">
-	<ng-container *ngIf="authorized; else loginScreen">
+	<ng-container *ngIf="authorized$ | async; else loginScreen">
 		<app-header></app-header>
 		<app-nav></app-nav>
 		<app-main></app-main>

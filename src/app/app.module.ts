@@ -20,6 +20,10 @@ import { WordSetCreatorComponent } from './word-set-creator/word-set-creator.com
 import { DropdownModule } from 'primeng/dropdown';
 import { StyleClassModule } from 'primeng/styleclass';
 import { DividerModule } from 'primeng/divider';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ApiModule } from './generated/api.module';
+import { environment } from 'src/environments/environment.development';
+import { AuthInterceptor } from './util/interceptors/auth.interceptor';
 
 @NgModule({
 	declarations: [
@@ -47,8 +51,12 @@ import { DividerModule } from 'primeng/divider';
 		DropdownModule,
 		StyleClassModule,
 		DividerModule,
+		HttpClientModule,
+		ApiModule.forRoot({ rootUrl: environment.apiUrl }),
 	],
-	providers: [],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

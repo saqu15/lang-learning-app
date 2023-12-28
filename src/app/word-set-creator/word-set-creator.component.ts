@@ -1,5 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+	AbstractControl,
+	FormArray,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+} from '@angular/forms';
+import { WordsService } from '../generated/services';
 
 interface City {
 	name: string;
@@ -18,6 +25,8 @@ export class WordSetCreatorComponent implements OnInit {
 	creatorForm!: FormGroup;
 
 	private fb = inject(FormBuilder);
+
+	private wordsService = inject(WordsService);
 
 	get words(): FormArray {
 		return this.creatorForm.get('words') as FormArray;
@@ -55,6 +64,12 @@ export class WordSetCreatorComponent implements OnInit {
 
 	test(): void {
 		console.log(this.creatorForm.getRawValue());
+	}
+
+	test2(): void {
+		this.wordsService.apiWordsGet({}).subscribe(response => {
+			console.log(response);
+		});
 	}
 
 	convertAbstractControlToFormGroup(control: AbstractControl): FormGroup {

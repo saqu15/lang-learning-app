@@ -24,7 +24,8 @@
 			<div class="col flex justify-content-center">
 				<p-button
 					label="Login"
-					[disabled]="!loginForm.valid"></p-button>
+					[disabled]="!loginForm.valid"
+					(click)="login()"></p-button>
 			</div>
 		</div>
 	</p-card>
