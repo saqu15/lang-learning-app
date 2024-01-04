@@ -13,6 +13,7 @@ import { apiWordsGet } from '../fn/words/api-words-get';
 import { ApiWordsGet$Params } from '../fn/words/api-words-get';
 import { apiWordsIdGet } from '../fn/words/api-words-id-get';
 import { ApiWordsIdGet$Params } from '../fn/words/api-words-id-get';
+import { Word } from '../models/word';
 
 
 /**
@@ -37,7 +38,7 @@ export class WordsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiWordsGet$Response(params?: ApiWordsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  apiWordsGet$Response(params?: ApiWordsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Word>>> {
     return apiWordsGet(this.http, this.rootUrl, params, context);
   }
 
@@ -51,9 +52,9 @@ export class WordsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiWordsGet(params?: ApiWordsGet$Params, context?: HttpContext): Observable<any> {
+  apiWordsGet(params?: ApiWordsGet$Params, context?: HttpContext): Observable<Array<Word>> {
     return this.apiWordsGet$Response(params, context).pipe(
-      map((r: StrictHttpResponse<any>): any => r.body)
+      map((r: StrictHttpResponse<Array<Word>>): Array<Word> => r.body)
     );
   }
 

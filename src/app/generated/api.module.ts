@@ -6,6 +6,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { UsersService } from './services/users.service';
 import { WordsService } from './services/words.service';
+import { WordsetsService } from './services/wordsets.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,6 +18,7 @@ import { WordsService } from './services/words.service';
   providers: [
     UsersService,
     WordsService,
+    WordsetsService,
     ApiConfiguration
   ],
 })

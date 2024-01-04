@@ -6,14 +6,19 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Word } from '../../models/word';
 
-export interface ApiWordsGet$Params {
+export interface ApiWordsetsWordsetIdDelete$Params {
+
+/**
+ * The ID of the wordset to delete.
+ */
+  wordsetId: string;
 }
 
-export function apiWordsGet(http: HttpClient, rootUrl: string, params?: ApiWordsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Word>>> {
-  const rb = new RequestBuilder(rootUrl, apiWordsGet.PATH, 'get');
+export function apiWordsetsWordsetIdDelete(http: HttpClient, rootUrl: string, params: ApiWordsetsWordsetIdDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  const rb = new RequestBuilder(rootUrl, apiWordsetsWordsetIdDelete.PATH, 'delete');
   if (params) {
+    rb.path('wordsetId', params.wordsetId, {});
   }
 
   return http.request(
@@ -21,9 +26,9 @@ export function apiWordsGet(http: HttpClient, rootUrl: string, params?: ApiWords
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<Word>>;
+      return r as StrictHttpResponse<any>;
     })
   );
 }
 
-apiWordsGet.PATH = '/api/words';
+apiWordsetsWordsetIdDelete.PATH = '/api/wordsets/{wordsetId}';

@@ -9,7 +9,6 @@ export class UserService {
 
 	login(token: string): void {
 		localStorage.setItem('token', token);
-		console.log('zalogowano');
 		this.updateLoginStatus(this.isLoggedIn());
 	}
 

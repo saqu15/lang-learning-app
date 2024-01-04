@@ -6,13 +6,12 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Word } from '../../models/word';
 
-export interface ApiWordsGet$Params {
+export interface ApiWordsetsGet$Params {
 }
 
-export function apiWordsGet(http: HttpClient, rootUrl: string, params?: ApiWordsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Word>>> {
-  const rb = new RequestBuilder(rootUrl, apiWordsGet.PATH, 'get');
+export function apiWordsetsGet(http: HttpClient, rootUrl: string, params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  const rb = new RequestBuilder(rootUrl, apiWordsetsGet.PATH, 'get');
   if (params) {
   }
 
@@ -21,9 +20,9 @@ export function apiWordsGet(http: HttpClient, rootUrl: string, params?: ApiWords
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<Word>>;
+      return r as StrictHttpResponse<any>;
     })
   );
 }
 
-apiWordsGet.PATH = '/api/words';
+apiWordsetsGet.PATH = '/api/wordsets';

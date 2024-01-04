@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './util/guards/auth.guard';
 import { WordSetCreatorComponent } from './word-set-creator/word-set-creator.component';
+import { LoginGuard } from './util/guards/login.guard';
 
 const routes: Routes = [
 	{
@@ -12,7 +13,7 @@ const routes: Routes = [
 		component: TestComponentComponent,
 		canActivate: [AuthGuard],
 	},
-	{ path: 'login', component: LoginComponent },
+	{ path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
 	{
 		path: 'create-set',
 		component: WordSetCreatorComponent,

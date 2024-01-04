@@ -6,14 +6,20 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Word } from '../../models/word';
+import { Wordset } from '../../models/wordset';
 
-export interface ApiWordsGet$Params {
+export interface ApiWordsetsPost$Params {
+  
+    /**
+     * Wordset data
+     */
+    body: Wordset
 }
 
-export function apiWordsGet(http: HttpClient, rootUrl: string, params?: ApiWordsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Word>>> {
-  const rb = new RequestBuilder(rootUrl, apiWordsGet.PATH, 'get');
+export function apiWordsetsPost(http: HttpClient, rootUrl: string, params: ApiWordsetsPost$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  const rb = new RequestBuilder(rootUrl, apiWordsetsPost.PATH, 'post');
   if (params) {
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -21,9 +27,9 @@ export function apiWordsGet(http: HttpClient, rootUrl: string, params?: ApiWords
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<Word>>;
+      return r as StrictHttpResponse<any>;
     })
   );
 }
 
-apiWordsGet.PATH = '/api/words';
+apiWordsetsPost.PATH = '/api/wordsets';
