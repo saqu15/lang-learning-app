@@ -1,6 +1,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css"
 @import "primeng/resources/primeng.css"
 @import "/node_modules/primeflex/primeflex.css"
+@import "primeicons/primeicons.css"
 
 body
 	margin: 0
@@ -59,11 +60,10 @@ body
 	z-index: 1
 	top: 60px
 	left: 250px
-	display: flex
-	flex-direction: column
 	height: calc(100vh - 60px)
 	width: calc(100vw - 250px)
 	background-color: #F8F8F8
+	overflow-y: auto
 
 
 .content
@@ -103,3 +103,36 @@ body
 .full-screen
 	height: 100%
 	width: 100%
+
+.space-between
+	display: flex
+	justify-content: space-between
+
+	> *
+		flex-grow: 1
+
+		&:not(:last-child)
+			margin-right: 10px
+
+.align-end
+	display: flex
+	justify-content: flex-end
+
+.footer-section
+	position: fixed
+	bottom: 0
+	width: 100%
+	padding: 10px
+	background-color: #f1f1f1
+
+.align-start
+	display: flex
+	justify-content: flex-start
+
+	> *
+		&:not(:last-child)
+			margin-right: 10px
+
+.centered
+	display: flex
+	justify-content: center

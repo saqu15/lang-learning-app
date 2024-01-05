@@ -5,27 +5,28 @@
 				pInputText
 				id="username"
 				formControlName="name"
-				placeholder="Set name"
+				placeholder="Wordset name"
 				class="w-full" />
 		</div>
 	</div>
 
 	<div class="grid pt-3">
-		<div class="col">
+		<div class="col-5">
 			<p-dropdown
-				[options]="cities"
-				[(ngModel)]="selectedCity"
-				optionLabel="name"
+				[options]="languages"
 				[showClear]="true"
 				placeholder="Source language"
 				formControlName="languageFrom"
 				styleClass="w-full"></p-dropdown>
 		</div>
-		<div class="col">
+		<div class="col-2 centered">
+			<p-button
+				icon="pi pi-arrow-right-arrow-left"
+				(click)="swapLanguages()"></p-button>
+		</div>
+		<div class="col-5">
 			<p-dropdown
-				[options]="cities"
-				[(ngModel)]="selectedCity"
-				optionLabel="name"
+				[options]="languages"
 				[showClear]="true"
 				placeholder="Target language"
 				formControlName="languageTo"
@@ -40,37 +41,37 @@
 			<div
 				class="grid pt-3"
 				[formGroup]="convertAbstractControlToFormGroup(wordsForm)">
-				<div class="col-6">
+				<div class="col-11 space-between">
 					<input
 						pInputText
 						id="username"
 						formControlName="nameFrom"
-						placeholder="Set name"
-						class="w-full" />
-				</div>
+						placeholder="Source word" />
 
-				<div class="col-6">
 					<input
 						pInputText
 						id="username"
 						formControlName="nameTo"
-						placeholder="Set name"
-						class="w-full" />
-
+						placeholder="Target word" />
+				</div>
+				<div class="col align-end">
 					<p-button
-						label="Delete"
+						icon="pi pi-times"
 						(click)="deleteWordsRow(i)"></p-button>
 				</div>
 			</div>
 		</ng-container>
 	</ng-container>
 
-	<div class="grid pt-3">
-		<div class="col">
-			<p-button label="Add" (click)="addWordsRow()"></p-button>
-			<p-button label="test" (click)="test()"></p-button>
-			<p-button label="test2" (click)="test2()"></p-button>
-			<p-button label="Save" (click)="save()"></p-button>
+	<div #footerSpace></div>
+
+	<div class="grid pt-3 footer-section" #footer>
+		<div class="col align-start">
+			<p-button label="Add row" (click)="addWordsRow()"></p-button>
+			<p-button
+				label="Save wordset"
+				(click)="save()"
+				[disabled]="!creatorForm.valid"></p-button>
 		</div>
 	</div>
 </div>
