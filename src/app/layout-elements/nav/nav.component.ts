@@ -12,26 +12,8 @@ export class NavComponent implements OnInit {
 	ngOnInit() {
 		this.items = [
 			{
-				label: 'Options',
+				label: 'Wordsets',
 				items: [
-					{
-						label: 'Update',
-						icon: 'pi pi-refresh',
-					},
-					{
-						label: 'Delete',
-						icon: 'pi pi-times',
-					},
-				],
-			},
-			{
-				label: 'Navigate',
-				items: [
-					{
-						label: 'Angular',
-						icon: 'pi pi-external-link',
-						url: 'http://angular.io',
-					},
 					{
 						label: 'Router',
 						icon: 'pi pi-upload',

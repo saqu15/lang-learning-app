@@ -18,34 +18,11 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		this.items = [
 			{
-				label: 'Options',
-				items: [
-					{
-						label: 'Update',
-						icon: 'pi pi-refresh',
-					},
-					{
-						label: 'Delete',
-						icon: 'pi pi-times',
-					},
-				],
-			},
-			{
-				label: 'Navigate',
-				items: [
-					{
-						label: 'Logout',
-						icon: 'pi pi-external-link',
-						command: () => {
-							this.logout();
-						},
-					},
-					{
-						label: 'Router',
-						icon: 'pi pi-upload',
-						routerLink: '/test',
-					},
-				],
+				label: 'Logout',
+				icon: 'pi pi-external-link',
+				command: () => {
+					this.logout();
+				},
 			},
 		];
 	}
