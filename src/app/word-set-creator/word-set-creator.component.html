@@ -63,15 +63,11 @@
 		</ng-container>
 	</ng-container>
 
-	<div #footerSpace></div>
-
-	<div class="grid pt-3 footer-section" #footer>
-		<div class="col align-start">
-			<p-button label="Add row" (click)="addWordsRow()"></p-button>
-			<p-button
-				label="Save wordset"
-				(click)="save()"
-				[disabled]="!creatorForm.valid"></p-button>
-		</div>
-	</div>
+	<app-footer
+		><p-button label="Add row" (click)="addWordsRow()"></p-button>
+		<p-button
+			label="Save wordset"
+			(click)="save()"
+			[disabled]="!creatorForm.valid"></p-button
+	></app-footer>
 </div>

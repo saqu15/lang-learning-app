@@ -1,0 +1,47 @@
+<ng-container *ngIf="wordsets$ | async as wordsets">
+	<ng-container *ngFor="let wordset of displayedWordsets">
+		<div class="pt-2">
+			<p-card [header]="wordset.wordsetName">
+				<!-- <p class="m-0">
+					{{ wordset | json }}
+				</p> -->
+				<div class="grid">
+					<div class="col">
+						Words count: {{ wordset.words?.length }}
+					</div>
+				</div>
+
+				<div class="grid">
+					<div class="col">
+						{{ wordset.languageFrom }} - {{ wordset.languageTo }}
+					</div>
+				</div>
+
+				<div class="grid">
+					<div class="col">description</div>
+				</div>
+
+				<div class="grid">
+					<div class="col align-start">
+						<p-button label="Add wordset"></p-button>
+						<p-button
+							label="Open wordset details"
+							[routerLink]="[
+								'/wordset-details',
+								wordset.id
+							]"></p-button>
+					</div>
+				</div>
+			</p-card>
+		</div>
+	</ng-container>
+
+	<div class="pt-2">
+		<p-paginator
+			(onPageChange)="onPageChange($event, wordsets)"
+			[first]="first"
+			[rows]="rows"
+			[totalRecords]="length"
+			[rowsPerPageOptions]="[5, 10, 15]"></p-paginator>
+	</div>
+</ng-container>

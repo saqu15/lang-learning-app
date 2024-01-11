@@ -24,6 +24,11 @@ export class NavComponent implements OnInit {
 						icon: 'pi pi-upload',
 						routerLink: '/create-set',
 					},
+					{
+						label: 'Browse wordsets',
+						icon: 'pi pi-upload',
+						routerLink: '/browse-sets',
+					},
 				],
 			},
 		];

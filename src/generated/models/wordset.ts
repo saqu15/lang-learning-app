@@ -5,6 +5,11 @@ import { Word } from '../models/word';
 export interface Wordset {
 
   /**
+   * Wordset ID.
+   */
+  id?: string;
+
+  /**
    * Source language of the wordset.
    */
   languageFrom?: Languages;

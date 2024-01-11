@@ -21,9 +21,18 @@ import { DropdownModule } from 'primeng/dropdown';
 import { StyleClassModule } from 'primeng/styleclass';
 import { DividerModule } from 'primeng/divider';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ApiModule } from './generated/api.module';
 import { environment } from 'src/environments/environment.development';
 import { AuthInterceptor } from './util/interceptors/auth.interceptor';
+import { ApiModule } from 'src/generated/api.module';
+import { CommonModule } from '@angular/common';
+import { BrowseSetsComponent } from './browse-sets/browse-sets.component';
+import { RatingModule } from 'primeng/rating';
+import { TagModule } from 'primeng/tag';
+import { PaginatorModule } from 'primeng/paginator';
+import { WordsetDetailsComponent } from './wordset-details/wordset-details.component';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TableModule } from 'primeng/table';
+import { FooterComponent } from './util/footer/footer.component';
 
 @NgModule({
 	declarations: [
@@ -34,8 +43,12 @@ import { AuthInterceptor } from './util/interceptors/auth.interceptor';
 		TestComponentComponent,
 		LoginComponent,
 		WordSetCreatorComponent,
+		BrowseSetsComponent,
+		WordsetDetailsComponent,
+  FooterComponent,
 	],
 	imports: [
+		CommonModule,
 		BrowserModule,
 		BrowserAnimationsModule,
 		AppRoutingModule,
@@ -52,6 +65,11 @@ import { AuthInterceptor } from './util/interceptors/auth.interceptor';
 		StyleClassModule,
 		DividerModule,
 		HttpClientModule,
+		RatingModule,
+		TagModule,
+		PaginatorModule,
+		TableModule,
+		ScrollPanelModule,
 		ApiModule.forRoot({ rootUrl: environment.apiUrl }),
 	],
 	providers: [

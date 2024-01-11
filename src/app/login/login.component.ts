@@ -5,11 +5,11 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
-import { UsersService } from '../generated/services';
-import { ApiUserLoginPost$Params } from '../generated/fn/users/api-user-login-post';
 import { UserService } from '../util/services/user.service';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/generated/services';
+import { ApiUserLoginPost$Params } from 'src/generated/fn/users/api-user-login-post';
 
 @Component({
 	selector: 'app-login',

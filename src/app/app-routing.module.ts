@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './util/guards/auth.guard';
 import { WordSetCreatorComponent } from './word-set-creator/word-set-creator.component';
 import { LoginGuard } from './util/guards/login.guard';
+import { BrowseSetsComponent } from './browse-sets/browse-sets.component';
+import { WordsetDetailsComponent } from './wordset-details/wordset-details.component';
 
 const routes: Routes = [
 	{
@@ -17,6 +19,16 @@ const routes: Routes = [
 	{
 		path: 'create-set',
 		component: WordSetCreatorComponent,
+		canActivate: [AuthGuard],
+	},
+	{
+		path: 'browse-sets',
+		component: BrowseSetsComponent,
+		canActivate: [AuthGuard],
+	},
+	{
+		path: 'wordset-details/:id',
+		component: WordsetDetailsComponent,
 		canActivate: [AuthGuard],
 	},
 	{ path: '', component: AppComponent, canActivate: [AuthGuard] },

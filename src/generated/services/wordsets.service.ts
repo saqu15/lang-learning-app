@@ -34,7 +34,7 @@ export class WordsetsService extends BaseService {
   /**
    * Get all wordsets.
    *
-   * Endpoint to retrieve all wordsets.
+   * Retrieve all wordsets from the database.
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiWordsetsGet()` instead.
@@ -48,7 +48,7 @@ export class WordsetsService extends BaseService {
   /**
    * Get all wordsets.
    *
-   * Endpoint to retrieve all wordsets.
+   * Retrieve all wordsets from the database.
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiWordsetsGet$Response()` instead.

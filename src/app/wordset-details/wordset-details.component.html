@@ -1,0 +1,69 @@
+<!-- {{ wordset$ | async | json }} -->
+
+<ng-container *ngIf="wordset$ | async as wordset">
+	<div class="grid">
+		<div class="col font-medium text-3xl">
+			Wordset: {{ wordset.wordsetName }}
+		</div>
+	</div>
+
+	<div class="grid pt-3">
+		<div class="col text-2xl">
+			{{ wordset.languageFrom }} - {{ wordset.languageTo }}
+		</div>
+	</div>
+
+	<!-- {{ wordset | json }} -->
+
+	<p-card header="Words">
+		<p-table
+			[value]="convertToAnyList(wordset.words)"
+			[tableStyle]="{ 'min-width': '50rem' }">
+			<ng-template pTemplate="header">
+				<tr>
+					<th>Word from</th>
+					<th>Word to</th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-word let-editing="editing">
+				<tr>
+					<td
+						[pEditableColumn]="word.nameFrom"
+						pEditableColumnField="nameFrom">
+						<p-cellEditor>
+							<ng-template pTemplate="input">
+								<input
+									pInputText
+									type="text"
+									[(ngModel)]="word.nameFrom" />
+							</ng-template>
+							<ng-template pTemplate="output">
+								{{ word.nameFrom }}
+							</ng-template>
+						</p-cellEditor>
+					</td>
+					<td
+						[pEditableColumn]="word.nameTo"
+						pEditableColumnField="nameTo">
+						<p-cellEditor>
+							<ng-template pTemplate="input">
+								<input
+									pInputText
+									type="text"
+									[(ngModel)]="word.nameTo" />
+							</ng-template>
+							<ng-template pTemplate="output">
+								{{ word.nameTo }}
+							</ng-template>
+						</p-cellEditor>
+					</td>
+				</tr>
+			</ng-template>
+		</p-table>
+	</p-card>
+
+	<app-footer
+		><p-button label="Add wordset"></p-button
+		><p-button label="Delete wordset"></p-button
+	></app-footer>
+</ng-container>

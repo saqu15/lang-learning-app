@@ -1,12 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	OnInit,
-	Renderer2,
-	ViewChild,
-	inject,
-} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
 	AbstractControl,
 	FormArray,
@@ -15,10 +7,9 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
-import { WordsetsService } from '../generated/services';
-import { ApiWordsetsPost$Params } from '../generated/fn/wordsets/api-wordsets-post';
-import { Wordset } from '../generated/models/wordset';
-import { Languages } from '../generated/models';
+import { ApiWordsetsPost$Params } from 'src/generated/fn/wordsets/api-wordsets-post';
+import { Languages, Wordset } from 'src/generated/models';
+import { WordsetsService } from 'src/generated/services';
 
 interface City {
 	name: string;
@@ -29,13 +20,7 @@ interface City {
 	templateUrl: './word-set-creator.component.html',
 	styleUrls: ['./word-set-creator.component.sass'],
 })
-export class WordSetCreatorComponent implements OnInit, AfterViewInit {
-	@ViewChild('footer')
-	footer!: ElementRef;
-
-	@ViewChild('footerSpace')
-	footerSpace!: ElementRef;
-
+export class WordSetCreatorComponent implements OnInit {
 	cities: City[] | undefined;
 
 	selectedCity: City | undefined;
@@ -47,8 +32,6 @@ export class WordSetCreatorComponent implements OnInit, AfterViewInit {
 	private fb = inject(FormBuilder);
 
 	private wordsetsService = inject(WordsetsService);
-
-	private renderer = inject(Renderer2);
 
 	get words(): FormArray {
 		return this.creatorForm.get('words') as FormArray;
@@ -65,14 +48,6 @@ export class WordSetCreatorComponent implements OnInit, AfterViewInit {
 		for (let i = 0; i < 5; i++) {
 			this.addWordsRow();
 		}
-	}
-
-	ngAfterViewInit(): void {
-		this.renderer.setStyle(
-			this.footerSpace.nativeElement,
-			'height',
-			`${this.footer.nativeElement.offsetHeight}px`
-		);
 	}
 
 	addWordsRow(): void {
