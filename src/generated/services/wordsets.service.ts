@@ -17,6 +17,7 @@ import { apiWordsetsWordsetIdDelete } from '../fn/wordsets/api-wordsets-wordset-
 import { ApiWordsetsWordsetIdDelete$Params } from '../fn/wordsets/api-wordsets-wordset-id-delete';
 import { apiWordsetsWordsetIdGet } from '../fn/wordsets/api-wordsets-wordset-id-get';
 import { ApiWordsetsWordsetIdGet$Params } from '../fn/wordsets/api-wordsets-wordset-id-get';
+import { Wordset } from '../models/wordset';
 
 
 /**
@@ -34,30 +35,58 @@ export class WordsetsService extends BaseService {
   /**
    * Get all wordsets.
    *
-   * Retrieve all wordsets from the database.
+   * Retrieve all wordsets from the database, including user details.
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `apiWordsetsGet()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiWordsetsGet$Response(params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  apiWordsetsGet$Response(params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+
+/**
+ * Number of wordsets.
+ */
+'count'?: number;
+'wordsets'?: Array<Wordset>;
+}>> {
     return apiWordsetsGet(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Get all wordsets.
    *
-   * Retrieve all wordsets from the database.
+   * Retrieve all wordsets from the database, including user details.
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `apiWordsetsGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiWordsetsGet(params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<any> {
+  apiWordsetsGet(params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<{
+
+/**
+ * Number of wordsets.
+ */
+'count'?: number;
+'wordsets'?: Array<Wordset>;
+}> {
     return this.apiWordsetsGet$Response(params, context).pipe(
-      map((r: StrictHttpResponse<any>): any => r.body)
+      map((r: StrictHttpResponse<{
+
+/**
+ * Number of wordsets.
+ */
+'count'?: number;
+'wordsets'?: Array<Wordset>;
+}>): {
+
+/**
+ * Number of wordsets.
+ */
+'count'?: number;
+'wordsets'?: Array<Wordset>;
+} => r.body)
     );
   }
 

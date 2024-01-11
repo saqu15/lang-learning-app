@@ -6,11 +6,19 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { Wordset } from '../../models/wordset';
 
 export interface ApiWordsetsGet$Params {
 }
 
-export function apiWordsetsGet(http: HttpClient, rootUrl: string, params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+export function apiWordsetsGet(http: HttpClient, rootUrl: string, params?: ApiWordsetsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+
+/**
+ * Number of wordsets.
+ */
+'count'?: number;
+'wordsets'?: Array<Wordset>;
+}>> {
   const rb = new RequestBuilder(rootUrl, apiWordsetsGet.PATH, 'get');
   if (params) {
   }
@@ -20,7 +28,14 @@ export function apiWordsetsGet(http: HttpClient, rootUrl: string, params?: ApiWo
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<any>;
+      return r as StrictHttpResponse<{
+      
+      /**
+       * Number of wordsets.
+       */
+      'count'?: number;
+      'wordsets'?: Array<Wordset>;
+      }>;
     })
   );
 }

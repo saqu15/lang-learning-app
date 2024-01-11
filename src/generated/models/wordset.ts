@@ -23,6 +23,11 @@ export interface Wordset {
    * User ID associated with the wordset.
    */
   userId?: string;
+
+  /**
+   * Author name.
+   */
+  userName?: string;
   words?: Array<Word>;
 
   /**

@@ -20,8 +20,6 @@ export class BrowseSetsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.wordsets$ = this.getWordsets$().pipe(
-			tap(wordset => (this.length = (wordset as any).count)),
-			map(wordset => (wordset as any).wordsets as Wordset[]),
 			tap(wordsets => {
 				this.onPageChange(
 					{
@@ -36,7 +34,10 @@ export class BrowseSetsComponent implements OnInit {
 	}
 
 	private getWordsets$(): Observable<Wordset[]> {
-		return this.wordsetsService.apiWordsetsGet();
+		return this.wordsetsService.apiWordsetsGet().pipe(
+			tap(wordset => (this.length = wordset.count ?? 0)),
+			map(wordset => wordset.wordsets as Wordset[])
+		);
 	}
 
 	first = 0;
