@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/util/services/user.service';
+import { User } from 'src/generated/models';
 
 @Component({
 	selector: 'app-header',
@@ -10,6 +12,8 @@ import { UserService } from 'src/app/util/services/user.service';
 })
 export class HeaderComponent implements OnInit {
 	items: MenuItem[] | undefined;
+
+	user$!: Observable<User>;
 
 	private userService = inject(UserService);
 
@@ -25,6 +29,8 @@ export class HeaderComponent implements OnInit {
 				},
 			},
 		];
+
+		this.user$ = this.userService.userInfo$();
 	}
 
 	private logout(): void {

@@ -1,10 +1,16 @@
 <!-- {{ wordset$ | async | json }} -->
 
+<p-toast></p-toast>
+
 <ng-container *ngIf="wordset$ | async as wordset">
 	<div class="grid">
 		<div class="col font-medium text-3xl">
 			Wordset: {{ wordset.wordsetName }}
 		</div>
+	</div>
+
+	<div class="grid pt-3">
+		<div class="col text-2xl">Created by: {{ wordset.userName }}</div>
 	</div>
 
 	<div class="grid pt-3">
@@ -61,7 +67,17 @@
 	</p-card>
 
 	<app-footer
-		><p-button label="Add wordset"></p-button
-		><p-button label="Delete wordset"></p-button
+		><p-button
+			label="Add wordset"
+			(click)="addWordsetToUser(wordset.id)"></p-button
+		><p-button
+			*ngIf="isCurrentUserAuthor(wordset.userId)"
+			pRipple
+			label="Update wordset"
+			(click)="updateWordset(wordset)"></p-button
+		><p-button
+			*ngIf="isCurrentUserAuthor(wordset.userId)"
+			label="Delete wordset"
+			(click)="deleteWordset(wordset.id)"></p-button
 	></app-footer>
 </ng-container>

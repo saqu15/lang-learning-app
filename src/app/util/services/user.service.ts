@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'src/generated/models';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class UserService {
 	private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+
+	private userInfo = new BehaviorSubject<User>({});
 
 	login(token: string): void {
 		localStorage.setItem('token', token);
@@ -29,11 +32,23 @@ export class UserService {
 		this.isLoggedInSubject.next(isLoggedIn);
 	}
 
+	setUserInfo(user: User): void {
+		this.userInfo.next(user);
+	}
+
+	userInfo$(): Observable<User> {
+		return this.userInfo.asObservable();
+	}
+
 	isLoggedOut(): boolean {
 		return !this.isLoggedIn();
 	}
 
 	getToken(): string | null {
 		return localStorage.getItem('token');
+	}
+
+	getUserId(): string {
+		return this.userInfo.getValue().id ?? '';
 	}
 }

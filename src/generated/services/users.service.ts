@@ -9,6 +9,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { apiUserGet } from '../fn/users/api-user-get';
+import { ApiUserGet$Params } from '../fn/users/api-user-get';
 import { apiUserLoginPost } from '../fn/users/api-user-login-post';
 import { ApiUserLoginPost$Params } from '../fn/users/api-user-login-post';
 import { apiUserSignupPost } from '../fn/users/api-user-signup-post';
@@ -158,6 +160,39 @@ export class UsersService extends BaseService {
   apiUserUserIdDelete(params: ApiUserUserIdDelete$Params, context?: HttpContext): Observable<any> {
     return this.apiUserUserIdDelete$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
+    );
+  }
+
+  /** Path part for operation `apiUserGet()` */
+  static readonly ApiUserGetPath = '/api/user';
+
+  /**
+   * Get current user.
+   *
+   * Retrieve current user details.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUserGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUserGet$Response(params?: ApiUserGet$Params, context?: HttpContext): Observable<StrictHttpResponse<User>> {
+    return apiUserGet(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Get current user.
+   *
+   * Retrieve current user details.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUserGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUserGet(params?: ApiUserGet$Params, context?: HttpContext): Observable<User> {
+    return this.apiUserGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<User>): User => r.body)
     );
   }
 

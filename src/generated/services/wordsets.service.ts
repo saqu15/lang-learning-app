@@ -17,6 +17,8 @@ import { apiWordsetsWordsetIdDelete } from '../fn/wordsets/api-wordsets-wordset-
 import { ApiWordsetsWordsetIdDelete$Params } from '../fn/wordsets/api-wordsets-wordset-id-delete';
 import { apiWordsetsWordsetIdGet } from '../fn/wordsets/api-wordsets-wordset-id-get';
 import { ApiWordsetsWordsetIdGet$Params } from '../fn/wordsets/api-wordsets-wordset-id-get';
+import { apiWordsetsWordsetIdPut } from '../fn/wordsets/api-wordsets-wordset-id-put';
+import { ApiWordsetsWordsetIdPut$Params } from '../fn/wordsets/api-wordsets-wordset-id-put';
 import { Wordset } from '../models/wordset';
 
 
@@ -152,6 +154,39 @@ export class WordsetsService extends BaseService {
    */
   apiWordsetsWordsetIdGet(params: ApiWordsetsWordsetIdGet$Params, context?: HttpContext): Observable<any> {
     return this.apiWordsetsWordsetIdGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<any>): any => r.body)
+    );
+  }
+
+  /** Path part for operation `apiWordsetsWordsetIdPut()` */
+  static readonly ApiWordsetsWordsetIdPutPath = '/api/wordsets/{wordsetId}';
+
+  /**
+   * Update a wordset by ID.
+   *
+   * Endpoint to update a wordset by its ID.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiWordsetsWordsetIdPut()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  apiWordsetsWordsetIdPut$Response(params: ApiWordsetsWordsetIdPut$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return apiWordsetsWordsetIdPut(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Update a wordset by ID.
+   *
+   * Endpoint to update a wordset by its ID.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiWordsetsWordsetIdPut$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  apiWordsetsWordsetIdPut(params: ApiWordsetsWordsetIdPut$Params, context?: HttpContext): Observable<any> {
+    return this.apiWordsetsWordsetIdPut$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
     );
   }

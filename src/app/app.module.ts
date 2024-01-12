@@ -45,7 +45,7 @@ import { FooterComponent } from './util/footer/footer.component';
 		WordSetCreatorComponent,
 		BrowseSetsComponent,
 		WordsetDetailsComponent,
-  FooterComponent,
+		FooterComponent,
 	],
 	imports: [
 		CommonModule,
