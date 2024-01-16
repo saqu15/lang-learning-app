@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, Subscription, catchError, map, tap, throwError } from 'rxjs';
 import { ApiWordsetsWordsetIdDelete$Params } from 'src/generated/fn/wordsets/api-wordsets-wordset-id-delete';
 import { ApiWordsetsWordsetIdGet$Params } from 'src/generated/fn/wordsets/api-wordsets-wordset-id-get';
 import { ApiWordsetsWordsetIdPut$Params } from 'src/generated/fn/wordsets/api-wordsets-wordset-id-put';
@@ -16,7 +16,7 @@ import { ApiUserWordsetsPost$Params } from 'src/generated/fn/user-wordsets/api-u
 	styleUrls: ['./wordset-details.component.sass'],
 	providers: [MessageService],
 })
-export class WordsetDetailsComponent implements OnInit {
+export class WordsetDetailsComponent implements OnInit, OnDestroy {
 	wordset$!: Observable<Wordset>;
 
 	private wordsetService = inject(WordsetsService);
@@ -35,11 +35,27 @@ export class WordsetDetailsComponent implements OnInit {
 
 	id!: string;
 
+	userSet = false;
+
+	subscriptions: Subscription[] = [];
+
 	ngOnInit(): void {
-		this.route.paramMap.subscribe(params => {
+		const routeParams = this.route.paramMap.subscribe(params => {
 			this.id = params.get('id') ?? '';
 			this.getWordset(this.id);
 		});
+
+		this.subscriptions.push(routeParams);
+
+		const queryParams = this.route.queryParams.subscribe(params => {
+			this.userSet = params['userSet'];
+		});
+
+		this.subscriptions.push(queryParams);
+	}
+
+	ngOnDestroy(): void {
+		this.subscriptions.forEach(subscription => subscription.unsubscribe());
 	}
 
 	private getWordset$(id: string): Observable<Wordset> {
@@ -96,7 +112,11 @@ export class WordsetDetailsComponent implements OnInit {
 
 	private getWordset(id: string): void {
 		this.wordset$ = this.getWordset$(id).pipe(
-			map(wordset => (wordset as any).wordset)
+			map(wordset => {
+				console.log(wordset);
+				return (wordset as any).wordsets;
+			}),
+			tap(console.log)
 		);
 	}
 

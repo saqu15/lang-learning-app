@@ -33,6 +33,7 @@ import { WordsetDetailsComponent } from './wordset-details/wordset-details.compo
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 import { FooterComponent } from './util/footer/footer.component';
+import { UserWordsetsComponent } from './user-wordsets/user-wordsets.component';
 
 @NgModule({
 	declarations: [
@@ -46,6 +47,7 @@ import { FooterComponent } from './util/footer/footer.component';
 		BrowseSetsComponent,
 		WordsetDetailsComponent,
 		FooterComponent,
+  UserWordsetsComponent,
 	],
 	imports: [
 		CommonModule,

@@ -22,6 +22,11 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		this.items = [
 			{
+				label: 'User wordsets',
+				icon: 'pi pi-external-link',
+				routerLink: '/user-wordsets',
+			},
+			{
 				label: 'Logout',
 				icon: 'pi pi-external-link',
 				command: () => {

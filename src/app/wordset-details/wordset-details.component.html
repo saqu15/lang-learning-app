@@ -1,5 +1,3 @@
-<!-- {{ wordset$ | async | json }} -->
-
 <p-toast></p-toast>
 
 <ng-container *ngIf="wordset$ | async as wordset">
@@ -66,17 +64,19 @@
 		</p-table>
 	</p-card>
 
-	<app-footer
+	<app-footer>
+		<p-button *ngIf="userSet" label="Start learning"> </p-button
 		><p-button
+			*ngIf="!userSet"
 			label="Add wordset"
 			(click)="addWordsetToUser(wordset.id)"></p-button
 		><p-button
-			*ngIf="isCurrentUserAuthor(wordset.userId)"
+			*ngIf="isCurrentUserAuthor(wordset.userId) || !userSet"
 			pRipple
 			label="Update wordset"
 			(click)="updateWordset(wordset)"></p-button
 		><p-button
-			*ngIf="isCurrentUserAuthor(wordset.userId)"
+			*ngIf="isCurrentUserAuthor(wordset.userId) || !userSet"
 			label="Delete wordset"
 			(click)="deleteWordset(wordset.id)"></p-button
 	></app-footer>
