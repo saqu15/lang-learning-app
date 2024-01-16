@@ -17,52 +17,66 @@
 		</div>
 	</div>
 
-	<p-card header="Words">
-		<p-table
-			[value]="convertToAnyList(wordset.words)"
-			[tableStyle]="{ 'min-width': '50rem' }">
-			<ng-template pTemplate="header">
-				<tr>
-					<th>Word from</th>
-					<th>Word to</th>
-				</tr>
-			</ng-template>
-			<ng-template pTemplate="body" let-word let-editing="editing">
-				<tr>
-					<td
-						[pEditableColumn]="word.nameFrom"
-						pEditableColumnField="nameFrom">
-						<p-cellEditor>
-							<ng-template pTemplate="input">
-								<input
-									pInputText
-									type="text"
-									[(ngModel)]="word.nameFrom" />
-							</ng-template>
-							<ng-template pTemplate="output">
-								{{ word.nameFrom }}
-							</ng-template>
-						</p-cellEditor>
-					</td>
-					<td
-						[pEditableColumn]="word.nameTo"
-						pEditableColumnField="nameTo">
-						<p-cellEditor>
-							<ng-template pTemplate="input">
-								<input
-									pInputText
-									type="text"
-									[(ngModel)]="word.nameTo" />
-							</ng-template>
-							<ng-template pTemplate="output">
-								{{ word.nameTo }}
-							</ng-template>
-						</p-cellEditor>
-					</td>
-				</tr>
-			</ng-template>
-		</p-table>
-	</p-card>
+	<div class="grid pt-3">
+		<div class="col text-2xl">Description: {{ wordset.description }}</div>
+	</div>
+
+	<div class="pt-3">
+		<p-card header="Words">
+			<p-table
+				[value]="convertToAnyList(wordset.words)"
+				[tableStyle]="{ 'min-width': '50rem' }">
+				<ng-template pTemplate="header">
+					<tr>
+						<th>Word from</th>
+						<th>Word to</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-word let-editing="editing">
+					<tr>
+						<td
+							[pEditableColumn]="word.nameFrom"
+							pEditableColumnField="nameFrom">
+							<p-cellEditor>
+								<ng-template pTemplate="input">
+									<input
+										*ngIf="
+											isCurrentUserAuthor(wordset.userId);
+											else output
+										"
+										pInputText
+										type="text"
+										[(ngModel)]="word.nameFrom" />
+								</ng-template>
+								<ng-template #output pTemplate="output">
+									{{ word.nameFrom }}
+								</ng-template>
+							</p-cellEditor>
+						</td>
+						<td
+							[pEditableColumn]="word.nameTo"
+							pEditableColumnField="nameTo">
+							<p-cellEditor>
+								<ng-template pTemplate="input">
+									<input
+										*ngIf="
+											isCurrentUserAuthor(wordset.userId);
+											else output
+										"
+										pInputText
+										type="text"
+										[(ngModel)]="word.nameTo" />
+								</ng-template>
+								<ng-template pTemplate="output">
+									{{ word.nameTo }}
+								</ng-template>
+							</p-cellEditor>
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</p-card>
+	</div>
 
 	<app-footer>
 		<p-button *ngIf="userSet" label="Start learning"> </p-button
@@ -71,13 +85,13 @@
 			label="Add wordset"
 			(click)="addWordsetToUser(wordset.id)"></p-button
 		><p-button
-			*ngIf="isCurrentUserAuthor(wordset.userId) || !userSet"
+			*ngIf="isCurrentUserAuthor(wordset.userId)"
 			pRipple
 			label="Update wordset"
 			(click)="updateWordset(wordset)"></p-button
 		><p-button
-			*ngIf="isCurrentUserAuthor(wordset.userId) || !userSet"
+			*ngIf="isCurrentUserAuthor(wordset.userId) || userSet"
 			label="Delete wordset"
-			(click)="deleteWordset(wordset.id)"></p-button
+			(click)="deleteWordset(wordset)"></p-button
 	></app-footer>
 </ng-container>

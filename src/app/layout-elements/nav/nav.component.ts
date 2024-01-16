@@ -15,11 +15,6 @@ export class NavComponent implements OnInit {
 				label: 'Wordsets',
 				items: [
 					{
-						label: 'Router',
-						icon: 'pi pi-upload',
-						routerLink: '/test',
-					},
-					{
 						label: 'Create new set',
 						icon: 'pi pi-upload',
 						routerLink: '/create-set',

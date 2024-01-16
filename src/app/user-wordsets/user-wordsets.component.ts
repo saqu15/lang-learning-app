@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { Observable, map, tap } from 'rxjs';
+import { ApiUserWordsetsDelete$Params } from 'src/generated/fn/user-wordsets/api-user-wordsets-delete';
 import { Wordset } from 'src/generated/models';
 import { UserWordsetsService } from 'src/generated/services';
 
@@ -19,6 +20,10 @@ export class UserWordsetsComponent {
 	length!: number;
 
 	ngOnInit(): void {
+		this.getWordsets();
+	}
+
+	private getWordsets(): void {
 		this.wordsets$ = this.getWordsets$().pipe(
 			tap(wordsets => {
 				console.log(wordsets);
@@ -26,7 +31,7 @@ export class UserWordsetsComponent {
 					{
 						first: this.first,
 						rows: this.rows,
-						page: 0,
+						page: this.page,
 					} as PaginatorState,
 					wordsets
 				);
@@ -45,13 +50,35 @@ export class UserWordsetsComponent {
 
 	rows = 5;
 
+	page = 0;
+
 	onPageChange(event: PaginatorState, wordsets: Wordset[]) {
 		this.first = Number(event.first);
 		this.rows = Number(event.rows);
+		this.page = Number(event.page);
 
 		this.displayedWordsets = wordsets.slice(
 			this.first,
 			this.rows * (Number(event.page) + 1)
 		);
+	}
+
+	deleteWordset(wordset: Wordset): void {
+		this.deleteUserWordset(wordset)
+			.pipe(
+				tap(() => {
+					this.getWordsets();
+				})
+			)
+			.subscribe();
+	}
+
+	private deleteUserWordset(wordset: Wordset): Observable<any> {
+		const params: ApiUserWordsetsDelete$Params = {
+			userId: wordset.ownerId ?? '',
+			userWordsetId: wordset.id ?? '',
+		};
+
+		return this.userWordsetsService.apiUserWordsetsDelete(params);
 	}
 }

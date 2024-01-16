@@ -10,7 +10,6 @@ import { MenubarModule } from 'primeng/menubar';
 import { NavComponent } from './layout-elements/nav/nav.component';
 import { MainComponent } from './layout-elements/main/main.component';
 import { HeaderComponent } from './layout-elements/header/header.component';
-import { TestComponentComponent } from './test-component/test-component.component';
 import { LoginComponent } from './login/login.component';
 import { CardModule } from 'primeng/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,6 +33,9 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 import { FooterComponent } from './util/footer/footer.component';
 import { UserWordsetsComponent } from './user-wordsets/user-wordsets.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { WordsetComponent } from './wordset/wordset.component';
+import { SplitterModule } from 'primeng/splitter';
 
 @NgModule({
 	declarations: [
@@ -41,13 +43,13 @@ import { UserWordsetsComponent } from './user-wordsets/user-wordsets.component';
 		NavComponent,
 		MainComponent,
 		HeaderComponent,
-		TestComponentComponent,
 		LoginComponent,
 		WordSetCreatorComponent,
 		BrowseSetsComponent,
 		WordsetDetailsComponent,
 		FooterComponent,
-  UserWordsetsComponent,
+		UserWordsetsComponent,
+		WordsetComponent,
 	],
 	imports: [
 		CommonModule,
@@ -72,6 +74,8 @@ import { UserWordsetsComponent } from './user-wordsets/user-wordsets.component';
 		PaginatorModule,
 		TableModule,
 		ScrollPanelModule,
+		InputTextareaModule,
+		SplitterModule,
 		ApiModule.forRoot({ rootUrl: environment.apiUrl }),
 	],
 	providers: [

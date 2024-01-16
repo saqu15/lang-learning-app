@@ -1,7 +1,16 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable, Subscription, catchError, map, tap, throwError } from 'rxjs';
+import {
+	Observable,
+	Subscription,
+	catchError,
+	map,
+	of,
+	switchMap,
+	tap,
+	throwError,
+} from 'rxjs';
 import { ApiWordsetsWordsetIdDelete$Params } from 'src/generated/fn/wordsets/api-wordsets-wordset-id-delete';
 import { ApiWordsetsWordsetIdGet$Params } from 'src/generated/fn/wordsets/api-wordsets-wordset-id-get';
 import { ApiWordsetsWordsetIdPut$Params } from 'src/generated/fn/wordsets/api-wordsets-wordset-id-put';
@@ -9,6 +18,7 @@ import { User, UserWordset, Wordset } from 'src/generated/models';
 import { UserWordsetsService, WordsetsService } from 'src/generated/services';
 import { UserService } from '../util/services/user.service';
 import { ApiUserWordsetsPost$Params } from 'src/generated/fn/user-wordsets/api-user-wordsets-post';
+import { ApiUserWordsetsDelete$Params } from 'src/generated/fn/user-wordsets/api-user-wordsets-delete';
 
 @Component({
 	selector: 'app-wordset-details',
@@ -38,6 +48,8 @@ export class WordsetDetailsComponent implements OnInit, OnDestroy {
 	userSet = false;
 
 	subscriptions: Subscription[] = [];
+
+	wordsetBackup!: Wordset;
 
 	ngOnInit(): void {
 		const routeParams = this.route.paramMap.subscribe(params => {
@@ -70,14 +82,25 @@ export class WordsetDetailsComponent implements OnInit, OnDestroy {
 		return item as any[];
 	}
 
-	deleteWordset(id: string | undefined): void {
-		this.deleteWordset$(id ?? '')
-			.pipe(
-				tap(() => {
-					this.router.navigate(['browse-sets']);
-				})
-			)
-			.subscribe();
+	deleteWordset(wordset: Wordset): void {
+		if (this.userSet) {
+			this.deleteUserWordset(wordset)
+				.pipe(
+					tap(() => {
+						console.log('wtf');
+						this.router.navigate(['user-wordsets']);
+					})
+				)
+				.subscribe();
+		} else {
+			this.deleteWordset$(wordset.id ?? '')
+				.pipe(
+					tap(() => {
+						this.router.navigate(['browse-sets']);
+					})
+				)
+				.subscribe();
+		}
 	}
 
 	private deleteWordset$(id: string): Observable<void> {
@@ -88,6 +111,15 @@ export class WordsetDetailsComponent implements OnInit, OnDestroy {
 		console.log(params);
 
 		return this.wordsetService.apiWordsetsWordsetIdDelete(params);
+	}
+
+	private deleteUserWordset(wordset: Wordset): Observable<any> {
+		const params: ApiUserWordsetsDelete$Params = {
+			userId: this.userService.getUserId() ?? '',
+			userWordsetId: wordset.id ?? '',
+		};
+
+		return this.userWordsetsService.apiUserWordsetsDelete(params);
 	}
 
 	updateWordset(wordset: Wordset): void {

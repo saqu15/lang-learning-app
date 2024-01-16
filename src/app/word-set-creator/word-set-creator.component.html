@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div [formGroup]="creatorForm">
 	<div class="grid pt-3">
 		<div class="col">
@@ -31,6 +32,19 @@
 				placeholder="Target language"
 				formControlName="languageTo"
 				styleClass="w-full"></p-dropdown>
+		</div>
+	</div>
+
+	<div class="grid pt-3">
+		<div class="col">
+			<span class="p-float-label">
+				<textarea
+					rows="3"
+					pInputTextarea
+					formControlName="description"
+					class="w-full"></textarea>
+				<label for="float-input">Description</label>
+			</span>
 		</div>
 	</div>
 

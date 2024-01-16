@@ -9,6 +9,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { apiUserWordsetsDelete } from '../fn/user-wordsets/api-user-wordsets-delete';
+import { ApiUserWordsetsDelete$Params } from '../fn/user-wordsets/api-user-wordsets-delete';
 import { apiUserWordsetsGet } from '../fn/user-wordsets/api-user-wordsets-get';
 import { ApiUserWordsetsGet$Params } from '../fn/user-wordsets/api-user-wordsets-get';
 import { apiUserWordsetsPost } from '../fn/user-wordsets/api-user-wordsets-post';
@@ -88,6 +90,159 @@ export class UserWordsetsService extends BaseService {
   apiUserWordsetsPost(params: ApiUserWordsetsPost$Params, context?: HttpContext): Observable<any> {
     return this.apiUserWordsetsPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
+    );
+  }
+
+  /** Path part for operation `apiUserWordsetsDelete()` */
+  static readonly ApiUserWordsetsDeletePath = '/api/user-wordsets';
+
+  /**
+   * Delete a user-associated wordset.
+   *
+   * Deletes a user-associated wordset for a specific user.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUserWordsetsDelete()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUserWordsetsDelete$Response(params: ApiUserWordsetsDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+
+/**
+ * A success message.
+ */
+'message'?: string;
+'request'?: {
+
+/**
+ * The HTTP request method (POST).
+ */
+'type'?: string;
+
+/**
+ * The URL to create a new user wordset.
+ */
+'url'?: string;
+'body'?: {
+
+/**
+ * The ID of the user.
+ */
+'userId'?: string;
+
+/**
+ * The ID of the deleted wordset.
+ */
+'wordsetId'?: string;
+};
+};
+}>> {
+    return apiUserWordsetsDelete(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Delete a user-associated wordset.
+   *
+   * Deletes a user-associated wordset for a specific user.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUserWordsetsDelete$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUserWordsetsDelete(params: ApiUserWordsetsDelete$Params, context?: HttpContext): Observable<{
+
+/**
+ * A success message.
+ */
+'message'?: string;
+'request'?: {
+
+/**
+ * The HTTP request method (POST).
+ */
+'type'?: string;
+
+/**
+ * The URL to create a new user wordset.
+ */
+'url'?: string;
+'body'?: {
+
+/**
+ * The ID of the user.
+ */
+'userId'?: string;
+
+/**
+ * The ID of the deleted wordset.
+ */
+'wordsetId'?: string;
+};
+};
+}> {
+    return this.apiUserWordsetsDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+
+/**
+ * A success message.
+ */
+'message'?: string;
+'request'?: {
+
+/**
+ * The HTTP request method (POST).
+ */
+'type'?: string;
+
+/**
+ * The URL to create a new user wordset.
+ */
+'url'?: string;
+'body'?: {
+
+/**
+ * The ID of the user.
+ */
+'userId'?: string;
+
+/**
+ * The ID of the deleted wordset.
+ */
+'wordsetId'?: string;
+};
+};
+}>): {
+
+/**
+ * A success message.
+ */
+'message'?: string;
+'request'?: {
+
+/**
+ * The HTTP request method (POST).
+ */
+'type'?: string;
+
+/**
+ * The URL to create a new user wordset.
+ */
+'url'?: string;
+'body'?: {
+
+/**
+ * The ID of the user.
+ */
+'userId'?: string;
+
+/**
+ * The ID of the deleted wordset.
+ */
+'wordsetId'?: string;
+};
+};
+} => r.body)
     );
   }
 

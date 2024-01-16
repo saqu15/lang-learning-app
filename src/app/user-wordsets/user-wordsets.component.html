@@ -16,16 +16,23 @@
 				</div>
 
 				<div class="grid">
-					<div class="col">description</div>
+					<div class="col">
+						Description: {{ wordset?.description }}
+					</div>
 				</div>
 
 				<div class="grid">
 					<div class="col align-start">
-						<p-button label="Start learning"></p-button>
+						<p-button
+							label="Start learning"
+							[routerLink]="['/wordset']"></p-button>
 						<p-button
 							label="Open wordset details"
 							[routerLink]="['/wordset-details', wordset.id]"
 							[queryParams]="{ userSet: true }"></p-button>
+						<p-button
+							label="Delete wordset"
+							(click)="deleteWordset(wordset)"></p-button>
 					</div>
 				</div>
 			</p-card>

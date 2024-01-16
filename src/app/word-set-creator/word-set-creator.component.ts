@@ -7,6 +7,8 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { tap } from 'rxjs';
 import { ApiWordsetsPost$Params } from 'src/generated/fn/wordsets/api-wordsets-post';
 import { Languages, Wordset } from 'src/generated/models';
 import { WordsetsService } from 'src/generated/services';
@@ -19,6 +21,7 @@ interface City {
 	selector: 'app-word-set-creator',
 	templateUrl: './word-set-creator.component.html',
 	styleUrls: ['./word-set-creator.component.sass'],
+	providers: [MessageService],
 })
 export class WordSetCreatorComponent implements OnInit {
 	cities: City[] | undefined;
@@ -33,6 +36,8 @@ export class WordSetCreatorComponent implements OnInit {
 
 	private wordsetsService = inject(WordsetsService);
 
+	private messageService = inject(MessageService);
+
 	get words(): FormArray {
 		return this.creatorForm.get('words') as FormArray;
 	}
@@ -43,6 +48,7 @@ export class WordSetCreatorComponent implements OnInit {
 			languageFrom: new FormControl('', Validators.required),
 			languageTo: new FormControl('', Validators.required),
 			words: new FormArray([], Validators.required),
+			description: new FormControl(''),
 		});
 
 		for (let i = 0; i < 5; i++) {
@@ -74,6 +80,7 @@ export class WordSetCreatorComponent implements OnInit {
 			languageFrom: form.languageFrom,
 			languageTo: form.languageTo,
 			words: form.words,
+			description: form.description,
 		};
 
 		const params: ApiWordsetsPost$Params = {
@@ -81,7 +88,13 @@ export class WordSetCreatorComponent implements OnInit {
 		};
 
 		this.wordsetsService
-			.apiWordsetsPost$Response(params)
+			.apiWordsetsPost(params)
+			.pipe(
+				tap(response => {
+					this.showToast('success', 'Success', 'Wordset created');
+					this.resetForm();
+				})
+			)
 			.subscribe(response => console.log(response));
 	}
 
@@ -91,5 +104,17 @@ export class WordSetCreatorComponent implements OnInit {
 
 		this.creatorForm.get('languageFrom')?.setValue(currentLanguageTo);
 		this.creatorForm.get('languageTo')?.setValue(currentLanguageFrom);
+	}
+
+	private showToast(severity: string, title: string, text: string): void {
+		this.messageService.add({
+			severity: severity,
+			summary: title,
+			detail: text,
+		});
+	}
+
+	private resetForm(): void {
+		this.creatorForm.reset();
 	}
 }
