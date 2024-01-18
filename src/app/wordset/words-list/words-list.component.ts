@@ -26,7 +26,7 @@ export class WordsListComponent implements OnInit, OnDestroy {
 	elapsedTime = 1;
 
 	ngOnInit(): void {
-		interval(100)
+		interval(1000)
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(() => this.elapsedTime++);
 	}
