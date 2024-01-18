@@ -1,18 +1,31 @@
-<p-card header="Last results">
-	<p class="m-0">user last results</p>
-</p-card>
+<ng-container *ngIf="wordset$ | async as wordset">
+	<ng-container *ngIf="!displayWordsList; else wordsList">
+		<p-card header="Last results">
+			<p class="m-0">user last results</p>
+		</p-card>
 
-<div class="pt-3">
-	<p-splitter [style]="{ height: '300px' }" styleClass="mb-5">
-		<ng-template pTemplate>
-			<div class="col flex align-items-center justify-content-center">
-				<p-button label="Learn"></p-button>
-			</div>
-		</ng-template>
-		<ng-template pTemplate>
-			<div class="col flex align-items-center justify-content-center">
-				<p-button label="Test" styleClass="wordset-button"></p-button>
-			</div>
-		</ng-template>
-	</p-splitter>
-</div>
+		<div class="pt-3">
+			<p-splitter [style]="{ height: '300px' }" styleClass="mb-5">
+				<ng-template pTemplate>
+					<div
+						class="col flex align-items-center justify-content-center">
+						<p-button label="Learn"></p-button>
+					</div>
+				</ng-template>
+				<ng-template pTemplate>
+					<div
+						class="col flex align-items-center justify-content-center">
+						<p-button label="Test" (click)="startTest()"></p-button>
+					</div>
+				</ng-template>
+			</p-splitter>
+		</div>
+	</ng-container>
+
+	<ng-template #wordsList>
+		<app-words-list
+			[wordset]="wordset"
+			[isTest]="isTest"
+			(returnToMenu)="returnToMenu()"></app-words-list>
+	</ng-template>
+</ng-container>

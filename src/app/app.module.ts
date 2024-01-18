@@ -36,6 +36,9 @@ import { UserWordsetsComponent } from './user-wordsets/user-wordsets.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { WordsetComponent } from './wordset/wordset.component';
 import { SplitterModule } from 'primeng/splitter';
+import { WordsListComponent } from './wordset/words-list/words-list.component';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TimeFormatPipe } from './util/pipes/time-format.pipe';
 
 @NgModule({
 	declarations: [
@@ -50,6 +53,8 @@ import { SplitterModule } from 'primeng/splitter';
 		FooterComponent,
 		UserWordsetsComponent,
 		WordsetComponent,
+		WordsListComponent,
+  TimeFormatPipe,
 	],
 	imports: [
 		CommonModule,
@@ -76,6 +81,7 @@ import { SplitterModule } from 'primeng/splitter';
 		ScrollPanelModule,
 		InputTextareaModule,
 		SplitterModule,
+		ToolbarModule,
 		ApiModule.forRoot({ rootUrl: environment.apiUrl }),
 	],
 	providers: [

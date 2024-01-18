@@ -33,7 +33,7 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 	},
 	{
-		path: 'wordset',
+		path: 'wordset/:id',
 		component: WordsetComponent,
 		canActivate: [AuthGuard],
 	},

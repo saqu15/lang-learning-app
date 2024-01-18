@@ -1,0 +1,30 @@
+<p-toolbar>
+	<div class="p-toolbar-group-start">
+		<p-button
+			label="Return"
+			icon="pi pi-arrow-left"
+			styleClass="p-button-text"
+			(click)="closeTest()"></p-button>
+	</div>
+	<div class="p-toolbar-group-end">
+		Elapsed time: {{ elapsedTime | timeFormat }}
+	</div>
+</p-toolbar>
+
+<div class="words-container mt-3">
+	<ng-container *ngFor="let word of wordset.words; let i = index">
+		<div class="grid">
+			<div class="col font-medium text-xl">
+				{{ word.nameFrom }}
+			</div>
+		</div>
+
+		<div class="grid pt-2">
+			<div class="col">
+				<input type="text" pInputText [(ngModel)]="word.nameTo" />
+			</div>
+		</div>
+
+		<p-divider *ngIf="wordset.words?.length !== i + 1"></p-divider>
+	</ng-container>
+</div>
