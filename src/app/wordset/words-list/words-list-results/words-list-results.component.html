@@ -1,0 +1,12 @@
+<div class="mt-3">
+	<p-card header="Finished">
+		<p class="m-0">
+			Congratulations! You finished test in: {{ time | timeFormat }}.
+			<br />
+			<ng-container *ngIf="wrongAnswers > 0">
+				You have typed the wrong word {{ wrongAnswers }} times.<br />
+			</ng-container>
+			Press "Return" to come back to wordset menu.
+		</p>
+	</p-card>
+</div>

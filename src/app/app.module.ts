@@ -39,6 +39,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { WordsListComponent } from './wordset/words-list/words-list.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TimeFormatPipe } from './util/pipes/time-format.pipe';
+import { WordsListResultsComponent } from './wordset/words-list/words-list-results/words-list-results.component';
 
 @NgModule({
 	declarations: [
@@ -54,7 +55,8 @@ import { TimeFormatPipe } from './util/pipes/time-format.pipe';
 		UserWordsetsComponent,
 		WordsetComponent,
 		WordsListComponent,
-  TimeFormatPipe,
+		TimeFormatPipe,
+		WordsListResultsComponent,
 	],
 	imports: [
 		CommonModule,
