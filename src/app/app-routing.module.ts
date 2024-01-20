@@ -37,7 +37,11 @@ const routes: Routes = [
 		component: WordsetComponent,
 		canActivate: [AuthGuard],
 	},
-	{ path: '', component: AppComponent, canActivate: [AuthGuard] },
+	{
+		path: '',
+		redirectTo: '/browse-sets',
+		pathMatch: 'full',
+	},
 	{ path: '*', component: AppComponent, canActivate: [AuthGuard] },
 ];
 

@@ -1,0 +1,26 @@
+<p-toolbar>
+	<div class="p-toolbar-group-start">
+		<p-button
+			label="Return"
+			icon="pi pi-arrow-left"
+			styleClass="p-button-text"
+			(click)="closeLearning()"></p-button>
+	</div>
+	<div class="p-toolbar-group-center">
+		Languages: {{ wordset.languageFrom }} - {{ wordset.languageTo }}
+	</div>
+	<div class="p-toolbar-group-end">
+		<p-button
+			label="Switch languages"
+			icon="pi pi-arrow-right-arrow-left"
+			styleClass="v-hidden"></p-button>
+	</div>
+</p-toolbar>
+
+<div style="width: 600px; margin: auto">
+	<ng-container *ngFor="let word of wordset.words">
+		<div class="mt-3">
+			<app-flashcard [word]="word"></app-flashcard>
+		</div>
+	</ng-container>
+</div>

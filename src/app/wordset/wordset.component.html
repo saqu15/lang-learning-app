@@ -1,15 +1,32 @@
 <ng-container *ngIf="wordset$ | async as wordset">
 	<ng-container *ngIf="!displayWordsList; else wordsList">
-		<p-card header="Last results">
-			<p class="m-0">user last results</p>
-		</p-card>
+		<p-toolbar>
+			<div class="p-toolbar-group-start">
+				<p-button
+					label="Return"
+					icon="pi pi-arrow-left"
+					styleClass="p-button-text"
+					(click)="returnToUserWordsets()"></p-button>
+			</div>
+			<div class="p-toolbar-group-center">
+				Languages: {{ wordset.languageFrom }} - {{ wordset.languageTo }}
+			</div>
+			<div class="p-toolbar-group-end">
+				<p-button
+					label="Switch languages"
+					icon="pi pi-arrow-right-arrow-left"
+					(click)="switchLanguages(wordset)"></p-button>
+			</div>
+		</p-toolbar>
 
 		<div class="pt-3">
 			<p-splitter [style]="{ height: '300px' }" styleClass="mb-5">
 				<ng-template pTemplate>
 					<div
 						class="col flex align-items-center justify-content-center">
-						<p-button label="Learn"></p-button>
+						<p-button
+							label="Learn"
+							(click)="startLearning()"></p-button>
 					</div>
 				</ng-template>
 				<ng-template pTemplate>
@@ -20,12 +37,50 @@
 				</ng-template>
 			</p-splitter>
 		</div>
+
+		<ng-container *ngIf="wordsetHistory$ | async as wordsetHistory">
+			<div class="mt-2" *ngIf="wordsetHistory.length > 0">
+				<p-card header="Last results">
+					<p-table
+						[value]="wordsetHistory"
+						[tableStyle]="{ 'min-width': '50rem' }">
+						<ng-template pTemplate="header">
+							<tr>
+								<th>Elapsed time</th>
+								<th>Fails</th>
+								<th>Language from - to</th>
+								<th>Finish date</th>
+							</tr>
+						</ng-template>
+						<ng-template pTemplate="body" let-history>
+							<tr>
+								<td>{{ history.timeElapsed | timeFormat }}</td>
+								<td>{{ history.fails }}</td>
+								<td>
+									{{ history.languageFrom }} -
+									{{ history.languageTo }}
+								</td>
+								<td>
+									{{ history.finishDate | date: 'medium' }}
+								</td>
+							</tr>
+						</ng-template>
+					</p-table>
+				</p-card>
+			</div>
+		</ng-container>
 	</ng-container>
 
 	<ng-template #wordsList>
 		<app-words-list
+			*ngIf="isTest; else flashcardList"
 			[wordset]="wordset"
-			[isTest]="isTest"
 			(returnToMenu)="returnToMenu()"></app-words-list>
+
+		<ng-template #flashcardList>
+			<app-flashcard-list
+				[wordset]="wordset"
+				(returnToMenu)="returnToMenu()"></app-flashcard-list>
+		</ng-template>
 	</ng-template>
 </ng-container>

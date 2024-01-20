@@ -1,6 +1,6 @@
 {
 	"name": "lang-learning-app",
-	"version": "0.0.0",
+	"version": "1.1.0",
 	"scripts": {
 		"ng-openapi-gen": "ng-openapi-gen",
 		"ng": "ng",

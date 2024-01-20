@@ -80,7 +80,14 @@ export class BrowseSetsComponent implements OnInit {
 					const err = new Error(error.error.message);
 					this.showToast('error', 'Error', err.message);
 					return throwError(() => err.message);
-				})
+				}),
+				tap(response =>
+					this.showToast(
+						'success',
+						'Success',
+						(response as any).message
+					)
+				)
 			)
 			.subscribe();
 	}

@@ -16,8 +16,19 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Subject, debounceTime, interval, takeUntil, tap } from 'rxjs';
+import {
+	Observable,
+	Subject,
+	debounceTime,
+	interval,
+	of,
+	switchMap,
+	takeUntil,
+	tap,
+} from 'rxjs';
+import { ApiWordsetHistoryPost$Params } from 'src/generated/fn/wordset-history/api-wordset-history-post';
 import { Word, Wordset } from 'src/generated/models';
+import { WordsetHistoryService } from 'src/generated/services';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -70,13 +81,13 @@ import { Word, Wordset } from 'src/generated/models';
 export class WordsListComponent implements OnInit, OnDestroy {
 	@Output() returnToMenu = new EventEmitter<void>();
 
-	@Input() isTest!: boolean;
-
 	@Input() wordset!: Wordset;
 
 	private fb = inject(FormBuilder);
 
 	private destroy$ = new Subject<void>();
+
+	private wordsetHistoryService = inject(WordsetHistoryService);
 
 	elapsedTime = 1;
 
@@ -119,7 +130,11 @@ export class WordsListComponent implements OnInit, OnDestroy {
 	}
 
 	closeTest(): void {
-		this.returnToMenu.emit();
+		if (this.testFinished) {
+			this.saveWordsetToHistory();
+		} else {
+			this.returnToMenu.emit();
+		}
 	}
 
 	convertToWordList(wordset: Wordset): Word[] {
@@ -171,5 +186,23 @@ export class WordsListComponent implements OnInit, OnDestroy {
 			this.destroy$.next();
 			this.testFinished = true;
 		}
+	}
+
+	saveWordsetToHistory(): void {
+		this.saveWordsetToHistory$()
+			.pipe(tap(() => this.returnToMenu.emit()))
+			.subscribe(console.log);
+	}
+
+	private saveWordsetToHistory$(): Observable<any> {
+		const params: ApiWordsetHistoryPost$Params = {
+			body: {
+				wordset: this.wordset,
+				finishDate: new Date().toString(),
+				timeElapsed: this.elapsedTime,
+				fails: this.wrongAnswers,
+			},
+		};
+		return this.wordsetHistoryService.apiWordsetHistoryPost(params);
 	}
 }

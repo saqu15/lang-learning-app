@@ -1,0 +1,7 @@
+<div
+	class="flashcard"
+	[@flip]="flipped ? 'flipped' : 'default'"
+	(click)="toggleFlip()">
+	<div class="front font-medium text-xl">{{ word.nameFrom }}</div>
+	<div class="back font-medium text-xl">{{ word.nameTo }}</div>
+</div>

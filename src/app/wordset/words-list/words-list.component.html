@@ -6,6 +6,9 @@
 			styleClass="p-button-text"
 			(click)="closeTest()"></p-button>
 	</div>
+	<div class="p-toolbar-group-center">
+		Languages: {{ wordset.languageFrom }} - {{ wordset.languageTo }}
+	</div>
 	<div class="p-toolbar-group-end">
 		Elapsed time: {{ elapsedTime | timeFormat }}
 	</div>

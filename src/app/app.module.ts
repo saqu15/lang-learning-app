@@ -40,6 +40,8 @@ import { WordsListComponent } from './wordset/words-list/words-list.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TimeFormatPipe } from './util/pipes/time-format.pipe';
 import { WordsListResultsComponent } from './wordset/words-list/words-list-results/words-list-results.component';
+import { FlashcardListComponent } from './wordset/words-list/flashcard-list/flashcard-list.component';
+import { FlashcardComponent } from './wordset/words-list/flashcard-list/flashcard/flashcard.component';
 
 @NgModule({
 	declarations: [
@@ -57,6 +59,8 @@ import { WordsListResultsComponent } from './wordset/words-list/words-list-resul
 		WordsListComponent,
 		TimeFormatPipe,
 		WordsListResultsComponent,
+		FlashcardListComponent,
+		FlashcardComponent,
 	],
 	imports: [
 		CommonModule,
