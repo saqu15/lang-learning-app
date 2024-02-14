@@ -6,7 +6,6 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { UsersService } from './services/users.service';
 import { UserWordsetsService } from './services/user-wordsets.service';
-import { WordsService } from './services/words.service';
 import { WordsetHistoryService } from './services/wordset-history.service';
 import { WordsetsService } from './services/wordsets.service';
 
@@ -20,7 +19,6 @@ import { WordsetsService } from './services/wordsets.service';
   providers: [
     UsersService,
     UserWordsetsService,
-    WordsService,
     WordsetHistoryService,
     WordsetsService,
     ApiConfiguration
